@@ -66,4 +66,7 @@ export function battle(hero: Character, monster: Character) {
   console.log('Monster has been defeated!\nHero wins\nGame Over.')
 }
 
-// battle()
+const hero = new Character('Hero', 100, 15);
+const monster = new Character('Monster', 80, 10);
+
+battle(hero, monster);
