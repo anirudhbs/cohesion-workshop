@@ -14,11 +14,11 @@ export class Character {
   }
 
   takeDamage(damage: number) {
-    this.health -= damage; 
+    this.health -= damage;
   }
 
   atack(monster: Character): void {
-    console.log('Hero attacks!\n');
+    console.log("Hero attacks!\n");
     monster.takeDamage(this.attackPower);
   }
 }
@@ -28,7 +28,7 @@ export class Character {
 //   attackPower = 10;
 
 //   takeDamage(damage: number) {
-//     this.health -= damage; 
+//     this.health -= damage;
 //   }
 
 //   atack(heroHealth: number): void {
@@ -55,18 +55,59 @@ export class Character {
 //   console.log('Hero\'s health is now ', hero.health)
 // }
 
-export function battle(hero: Character, monster: Character) {
-  console.log(`A ${monster.name} appears!\n`)
-  console.log(`Hero (HP: ${hero.health}) vs. Monster (HP: ${monster.health})\n`)
+// export function battle(hero: Character, monster: Character) {
+//   console.log(`A ${monster.name} appears!\n`);
+//   console.log(
+//     `Hero (HP: ${hero.health}) vs. Monster (HP: ${monster.health})\n`
+//   );
 
-  while (monster.isAlive()) {
-    hero.atack(monster)
+//   while (monster.isAlive()) {
+//     hero.atack(monster);
+//   }
+
+//   console.log("Monster has been defeated!\nHero wins\nGame Over.");
+// }
+
+export class Battle {
+  private hero: Character;
+  private monster: Character;
+
+  constructor(hero: Character, monster: Character) {
+    this.hero = hero;
+    this.monster = monster;
+  }
+  // annouce the winner method
+  private isGameStillOn(): boolean {
+    return !this.hero.isAlive() || !this.monster.isAlive();
   }
 
-  console.log('Monster has been defeated!\nHero wins\nGame Over.')
+  announceStart(): void {
+    console.log(
+      `A ${monster.name} appears! Hero (HP: ${hero.health}) vs. Monster (HP: ${monster.health})`
+    );
+  }
+
+  startBattle(): void {
+    this.announce(
+      `A ${monster.name} appears! Hero (HP: ${hero.health}) vs. Monster (HP: ${monster.health})`
+    );
+
+    while (this.isGameStillOn()) {
+      if (hero.isAlive()) {
+        hero.atack(this.monster);
+      }
+      if (monster.isAlive()) {
+        monster.atack(this.hero);
+      }
+    }
+  }
+
+  private announce(message: string): void {
+    console.log(message);
+  }
 }
 
-const hero = new Character('Hero', 100, 15);
-const monster = new Character('Monster', 80, 10);
+const hero = new Character("Hero", 100, 15);
+const monster = new Character("Monster", 80, 10);
 
-battle(hero, monster);
+const battle = new Battle(hero, monster);
